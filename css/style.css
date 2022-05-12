@@ -26,7 +26,7 @@
     font-size: 2.5rem;
     margin: 10px;
     
-    border: 2px solid black;
+    
     
     
   }
@@ -34,7 +34,7 @@
   span{
     font-size: 2rem;
     font-weight: bold;
-    border: 2px solid black;
+    
     float: left;
     width: 100%;
   }
@@ -45,33 +45,41 @@
     flex-direction: column;
     width: 75vw;
     margin: 10px auto;
-    border: 2px solid red;
+    
     
   }
   #categoryRow{
     display: flex;
     align-items: baseline;
     margin-bottom: 20px;
-    border: 2px solid orange;
+   
   }
 
   #clueBoard{
     flex-direction: column;
-    border: 2px solid blue;
+    
 }
 
 .clueRow{
   display: flex;
-  border: 2px solid orange;
+  
 }
 
 .clueBox{
   display: flex;
-  border: 2px solid green;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  background-color: blue;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
   border-radius: 5px;
   margin: 5px;
   height: 100px;
   flex: 1;
+  text-transform: uppercase;
+
 }
 /******************************************
 /* ADDITIONAL STYLES
