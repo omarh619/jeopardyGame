@@ -2,6 +2,9 @@
  initBoard()
  initCatRow()
 
+ document.querySelector('button').addEventListener('click', buildCategories)
+
+
  function initCatRow(){
   let catRow = document.getElementById('categoryRow')
 
@@ -11,6 +14,7 @@
     catRow.appendChild(box)
   }
  }
+//create clue board
 
  function initBoard(){
   let board = document.getElementById('clueBoard')
@@ -31,28 +35,67 @@
 
     board.appendChild(row)
   }
-  function getClue(){
-    console.log('yay')
-  }
+  
  }
-/* document.querySelector('button').addEventListener('click', getFetch)
+ //call api
+ function randInt(){
+   return Math.floor(Math.random() * (18418) + 1)
+ }
 
-function getFetch(){
-  const choice = document.querySelector('input').value
-  console.log(choice)
-  const url = `https://tasty.p.rapidapi.com/recipes/auto-complete`
+ let catArray = []
 
-  fetch(url)
-      .then(res => res.json()) // parse response as JSON
-      .then(data => {
-        console.log(data)
-       
-        document.querySelector('h3').innerText = data.explanation
-      })
-      .catch(err => {
-          console.log(`error ${err}`)
-      });
-}
+ function buildCategories(){
+   const fetchReq1 = fetch(
+     `http://jservice.io/api/category?&id=${randInt()}`
+   ).then((res)=> res.json());
+  
+   const fetchReq2 = fetch(
+    `http://jservice.io/api/category?&id=${randInt()}`
+  ).then((res)=> res.json());
 
- 
- */
+  const fetchReq3 = fetch(
+    `http://jservice.io/api/category?&id=${randInt()}`
+  ).then((res)=> res.json());
+
+  const fetchReq4 = fetch(
+    `http://jservice.io/api/category?&id=${randInt()}`
+  ).then((res)=> res.json());
+
+  const fetchReq5 = fetch(
+    `http://jservice.io/api/category?&id=${randInt()}`
+  ).then((res)=> res.json());
+
+  const fetchReq6 = fetch(
+    `http://jservice.io/api/category?&id=${randInt()}`
+  ).then((res)=> res.json());
+
+  const allData = Promise.all([fetchReq1, fetchReq2, fetchReq3, fetchReq4, fetchReq5, fetchReq6])
+  allData.then((res)=> {
+    console.log(res)
+    catArray = res
+    setCatagories(catArray)
+  })
+ }
+//load categories to the board
+ function setCatagories(catArray){
+  let element = document.getElementById('categoryRow')
+    let children = element.children;
+    for(let i = 0; i < children.length; i++){
+      children[i].innerHTML = catArray[i].title
+    }
+ }
+
+ function getClue(event){
+   let child = event.currentTarget
+   child.classList.add('clickedBOX')
+   let boxValue = child.innerHTML.slice(1)
+   let parent = child.parentNode
+   let index = Array.prototype.findIndex.call(parent.children, (c)=> c === child)
+   let cluesList = catArray[index].clues
+   let clue = cluesList.find(obj => {
+     return obj.value == boxValue
+   })
+   console.log(clue)
+ }
+
+
